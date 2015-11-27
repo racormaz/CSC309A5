@@ -25,8 +25,45 @@ var userSchema = mongoose.Schema({
     permissions: {
         type: String,
         trim: true
-    }
+    },
+    interests: [String],
+    creationDate : Date,
+    friends: [userSchema]
+    
 });
+
+var postSchema = mongoose.Schema({
+    postTo : {
+        type: ObjectId
+    },
+    author : {
+        type: ObjectId
+    },
+    content: {
+        type:  String
+    },
+    date : {
+        type: Date
+    },
+    comments : [commentSchema],
+    tags: [String]
+
+});
+
+var commentSchema = mongoose.Schema({
+    author : {
+        type: ObjectId
+    },
+    content: {
+        type:  String
+    },
+    date : {
+        type: Date
+    },
+    parentPost: postSchema,
+    tag: [String]
+
+}); 
 
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
