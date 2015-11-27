@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <title>Assignment 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            <a href="/welcome">
+                    <img src="/logo/r.png" alt="Awesome Logo" width="35" height="35" border="0" />
+                </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/editUser"> <%= currentUser.display_name %> </a></li>
+                    <li><a href="/logout" class="btn btn-default btn-sm">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    
+<div class="container">
+
+    <div class="page-header text-center">
+        <h2>Edit Profile</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+                <h1>Edit</h1>
+                <form id="editForm" action="/edit" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input value="<%= currentUser.email %>" type="text" class="form-control" name="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Display Name</label>
+                        <input value="<%= currentUser.display_name %>" type="text" class="form-control" focus="" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input value="<%= currentUser.description %>" type="text" class="form-control" name="description">
+                    </div>
+            
+                    <button type="submit" class="btn btn-lg">Update</button>
+                </form>
+
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+            <% } %>
+
+            <h1>Edit Password</h1>
+            <form id="passwordForm" action="/editPassword" method="post">
+                <input style="visibility: hidden;" value="<%= currentUser.email %>" type="text" class="form-control" name="email" readonly>
+                <div class="form-group">
+                    <label>Old Password</label>
+                    <input type="password" class="form-control" name="oldPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" class="form-control" name="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" class="form-control" name="confirmNewPassword" required>
+                </div>
+                <button type="submit" class="btn btn-lg">Update</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

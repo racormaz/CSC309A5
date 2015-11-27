@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <title>Assignment 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/welcome">
+                    <img src="/logo/r.png" alt="Awesome Logo" width="35" height="35" border="0" />
+                </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/editUser"> <%= currentUser.display_name %> </a></li>
+                    <li><a href="/logout" class="btn btn-default btn-sm">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    
+<div class="container">
+
+    <div class="page-header text-center">
+        <h2>Edit <%= user.display_name %>'s Profile</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+                <h1>Edit</h1>
+                <form id="editForm" action="/adminEdit" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input value="<%= user.email %>" type="text" class="form-control" name="email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Display Name</label>
+                        <input value="<%= user.display_name %>" type="text" class="form-control" focus="" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input value="<%= user.description %>" type="text" class="form-control" name="description">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Permissions</label>
+                        <input value="<%= user.permissions %>" type="text" class="form-control" name="permissions" readonly >
+                    </div>
+            
+                    <button type="submit" class="btn btn-lg">Update</button>
+                </form>
+
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+            <% if (currentUser.permissions == "super admin") { %>
+                <% if (user.permissions == "admin") { %>
+                <a onclick="$('#editForm').attr('action', '/toggleAdmin').submit();" class="btn btn-default btn-sm">Revoke Admin</a>
+                <% } else { %>
+                    <a onclick="$('#editForm').attr('action', '/toggleAdmin').submit();" class="btn btn-default btn-sm">Make Admin</a>
+                <% } %>
+            <% } %>
+            <a onclick="$('#editForm').attr('action', '/delete').submit();" class="btn btn-default btn-sm">Delete</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

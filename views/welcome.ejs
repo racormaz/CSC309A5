@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Assignment 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/welcome.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/welcome">
+                    <img src="/logo/r.png" alt="Awesome Logo" width="35" height="35" border="0" />
+                </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/editProfile"> <%= currentUser.display_name %> </a></li>
+                    <li><a href="/logout" class="btn btn-default btn-sm">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    
+    
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1>Welcome</h1>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover" id="users-table">
+            <thead>
+              <tr>
+                <th>User Email</th>
+                <th>Display Name</th>
+              </tr>
+            </thead>
+            <tbody name="tbody">
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<form style="visibility: hidden;" id="profileForm" action="/userProfile" method="post">
+<input type="text" class="form-control" name="email" required>
+</form>
+<script>
+
+var thisUser = <%- JSON.stringify(currentUser) %>;
+
+</script>
+</body>
+</html>
